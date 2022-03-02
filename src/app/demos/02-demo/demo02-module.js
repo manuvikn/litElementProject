@@ -1,0 +1,9 @@
+import './computed-properties';
+import './dynamic-repeated-templates';
+import './first-update';
+import './lifecycle';
+import './light-dom';
+import './querying-dom';
+import './reflecting-attributes';
+import './slotting';
+import './updated';
