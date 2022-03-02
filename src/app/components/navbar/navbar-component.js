@@ -66,23 +66,27 @@ class NavbarComponent extends LitElement {
                 <nav id="navContainer" class="directionColumn">
                    <button @click=${this.toggleMenu} id="buttonMenu">Toggle</button> 
                     <collapse-nav-component id="contentMenu">
-                        <span class="navItem">Home</span>
-                        <span class="navItem">Data</span>
-                        <span class="navItem">Users</span>
-                        <span class="navItem">Login</span>    
-                    </collapse-nav-component>
+                        ${this.itemsNavLeft.map(item => {
+                            return html`<span class="navItem">${item}</span>`
+                        })}
+                        ${this.itemsNavRight.map(item => {
+                            return html`<span class="navItem">${item}</span>`
+                        })}
+                        </collapse-nav-component>
                 </nav>`;
 
         } else {
 
             return html`<nav id="navContainer">
                     <div class="leftContent">
-                    <span class="navItem">Home</span>
-                    <span class="navItem">Data</span>
-                    <span class="navItem">Users</span>
+                    ${this.itemsNavLeft.map(item => {
+                        return html`<span class="navItem">${item}</span>`
+                    })}
                     </div>
                     <div class="rightContent">
-                        <span class="navItem">Login</span>
+                    ${this.itemsNavRight.map(item => {
+                        return html`<span class="navItem">${item}</span>`
+                    })}
                     </div>
                     </nav>`;
         }
@@ -94,6 +98,12 @@ class NavbarComponent extends LitElement {
         return {
             showMenuBurger: {
                 type: Boolean
+            },
+            itemsNavLeft: {
+                type: Array
+            },
+            itemsNavRight: {
+                type: Array
             }
         };
     }
@@ -101,6 +111,8 @@ class NavbarComponent extends LitElement {
     constructor() {
 
         super();
+        this.itemsNavLeft = ['Home', 'Data', 'Users'];
+        this.itemsNavRight = ['Login'];
         this.mql = window.matchMedia('(min-width: 600px)');
         this.testMql(this.mql);
         this.addMqlEvent();
