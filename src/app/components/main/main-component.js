@@ -30,6 +30,13 @@ class MainComponent extends LitElement {
         <br><br>
         <button @click=${this.toggle}>toggle</button>
 
+        <br/><br/>
+
+        <until-directive></until-directive>
+
+        <brewery-app></brewery-app>
+
+
         </div>`;
 
     }

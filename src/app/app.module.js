@@ -1,6 +1,7 @@
 
 // Modules
-import './demos/02-demo';
+import './demos/02-demo/demo02-module';
+import './demos/03-demo/demo03-module';
 
 
 // Components 
