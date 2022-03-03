@@ -1,47 +1,44 @@
 import { LitElement, html } from "lit";
 
-class PropertySetterObserver extends LitElement {
+class ShouldUpdate extends LitElement {
   static get properties() {
     return {
-      _focused: { type: Boolean }
+      active: { type: Boolean },
+      count: { type: Number }
     };
   }
 
   constructor() {
     super();
 
-    this.focused = false;
-  }
+    this.active = true;
+    this.count = 0;
 
-  get focused() {
-    return this._focused;
-  }
-
-  // To observe property changes, you can write your own getters and setters
-  // and create side effects when they are set. When the properties are set by
-  // other components during rendering, the setter will be called.
-  set focused(focused) {
-    // If besides side effects, you also need the value for rendering you can set
-    // the property under a different name.
-    this._focused = focused;
-
-    if (focused) {
-      this.shadowRoot.getElementById("amountInput").focus();
-    }
+    // Increment a counter each second. Note that even when render is prevented, javascript will
+    // continue to run. When rendering is turned on again at a later time, the values of the
+    // properties at that moment are picked up again.
+    setInterval(() => {
+      this.count += 1;
+    }, 1000);
   }
 
   render() {
     return html`
-      <input
-        id="amountInput"
-        type="number"
-        name="amount"
-        @blur="${() => (this.focused = false)}"
-      />
-      Focused: ${this._focused}
-      <button @click="${() => (this.focused = true)}">Focus input</button>
+      Current count: ${this.count}
+      <button @click="${() => (this.active = !this.active)}">
+        Toggle active
+      </button>
     `;
+  }
+
+  // The shouldUpdate function receives a map with keys for the changed properties
+  // pointing to their previous values.
+  // Based on this, you can decide whether the component should re-render on not. This
+  // is useful to for example block re-rendering of the component while it is not active
+  // or in view.
+  shouldUpdate(changedProperties) {
+    return this.active;
   }
 }
 
-customElements.define("property-setter-observer", PropertySetterObserver);
+customElements.define("should-update", ShouldUpdate);
