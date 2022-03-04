@@ -10,3 +10,5 @@ import './components/navbar/navbar-component';
 import './components/main/main-component';
 import './components/collapse/collapse-component';
 import './components/collapse-nav/collapse.nav-component';
+import './components/cards-component/cards-component';
+import './components/card-component/card-component';
