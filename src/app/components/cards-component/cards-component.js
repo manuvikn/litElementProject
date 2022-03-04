@@ -1,5 +1,4 @@
 import { css, html, LitElement } from "lit";
-import { PageActiveService } from "../../services/page-active.service";
 
 class CardsComponent extends LitElement {
 
@@ -26,16 +25,8 @@ class CardsComponent extends LitElement {
     static get properties() {
 
         return {
-            arrData: {type: Array},
-            pageActiveService: {type: PageActiveService}
+            arrData: {type: Array}
         };
-
-    }
-
-    constructor() {
-
-        super();
-        this.pageActiveService = PageActiveService.instance;
 
     }
 
