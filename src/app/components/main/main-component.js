@@ -12,18 +12,21 @@ class MainComponent extends LitElement {
 
     constructor() {
         super();
-        this.pageActive = 'home';
         this.pageActiveService = PageActiveService.instance;
     }
 
     static get styles() {
-        return css`.container{ margin: 2em 3em }`;
+        return css`.container {
+                margin: 2em 3em;
+            }`;
     }
 
     connectedCallback() {
 
         super.connectedCallback();
-        // this.pageActiveService
+        this.pageActiveService.pageActive.asObservable()
+            .subscribe(data => this.pageActive = data);
+        this.pageActiveService.pageActive.next( 'home-component' );    
 
     }
 
@@ -32,10 +35,26 @@ class MainComponent extends LitElement {
         return html`
             <div class="container">
 
-                <cards-component></cards-component>
+                ${this.switchPage(this.pageActive)}
             
             </div>
         `;
+
+    }
+
+    switchPage( pageActive ) {
+
+        switch(pageActive) {
+            case 'users-component':
+                return html`<users-component></users-component>`;
+                break;
+            case 'home-component':
+                return html`<home-component></home-component>`;
+                break;
+            default:
+                return html`<h1>Not Found</h1>`;
+                break;
+        }
 
     }
 

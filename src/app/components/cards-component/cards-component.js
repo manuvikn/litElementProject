@@ -1,4 +1,5 @@
 import { css, html, LitElement } from "lit";
+import { PageActiveService } from "../../services/page-active.service";
 
 class CardsComponent extends LitElement {
 
@@ -14,6 +15,7 @@ class CardsComponent extends LitElement {
                 row-gap: 1em;
                 justify-content: center;
                 align-items: center;
+                padding-bottom: 2em; 
 
             }
 
@@ -24,8 +26,16 @@ class CardsComponent extends LitElement {
     static get properties() {
 
         return {
-            arrData: {type: Array}
+            arrData: {type: Array},
+            pageActiveService: {type: PageActiveService}
         };
+
+    }
+
+    constructor() {
+
+        super();
+        this.pageActiveService = PageActiveService.instance;
 
     }
 
@@ -63,7 +73,7 @@ class CardsComponent extends LitElement {
                     ))
                 });
                 }))
-        }, 2000);
+        }, 500);
 
     }
 

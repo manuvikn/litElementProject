@@ -1,4 +1,5 @@
 const { LitElement, css, html } = require("lit");
+const { PageActiveService } = require("../../services/page-active.service");
 
 class NavbarComponent extends LitElement {
 
@@ -67,10 +68,12 @@ class NavbarComponent extends LitElement {
                    <button @click=${this.toggleMenu} id="buttonMenu">Toggle</button> 
                     <collapse-nav-component id="contentMenu">
                         ${this.itemsNavLeft.map(item => {
-                            return html`<span class="navItem">${item}</span>`
+                            return html`<span @click=${this.navigateTo(item)}
+                            class="navItem">${item}</span>`
                         })}
                         ${this.itemsNavRight.map(item => {
-                            return html`<span class="navItem">${item}</span>`
+                            return html`<span @click=${this.navigateTo(item)} 
+                            class="navItem">${item}</span>`
                         })}
                         </collapse-nav-component>
                 </nav>`;
@@ -80,12 +83,14 @@ class NavbarComponent extends LitElement {
             return html`<nav id="navContainer">
                     <div class="leftContent">
                     ${this.itemsNavLeft.map(item => {
-                        return html`<span class="navItem">${item}</span>`
+                        return html`<span @click=${this.navigateTo(item)} 
+                        class="navItem">${item}</span>`
                     })}
                     </div>
                     <div class="rightContent">
                     ${this.itemsNavRight.map(item => {
-                        return html`<span class="navItem">${item}</span>`
+                        return html`<span @click=${this.navigateTo(item)} 
+                        class="navItem">${item}</span>`
                     })}
                     </div>
                     </nav>`;
@@ -104,6 +109,9 @@ class NavbarComponent extends LitElement {
             },
             itemsNavRight: {
                 type: Array
+            },
+            pageActiveService: {
+                type: PageActiveService
             }
         };
     }
@@ -111,6 +119,7 @@ class NavbarComponent extends LitElement {
     constructor() {
 
         super();
+        this.pageActiveService = PageActiveService.instance;
         this.itemsNavLeft = ['Home', 'Data', 'Users'];
         this.itemsNavRight = ['Login'];
         this.mql = window.matchMedia('(min-width: 600px)');
@@ -139,6 +148,14 @@ class NavbarComponent extends LitElement {
 
         const contentMenu = this.shadowRoot.querySelector('#contentMenu');
         contentMenu.toggle();
+
+    }
+
+    navigateTo(pageActive) {
+
+        const path = pageActive.toLowerCase().concat( '-component' );
+
+        return () => this.pageActiveService.pageActive.next( path );
 
     }
 

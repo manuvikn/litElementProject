@@ -4,6 +4,10 @@ import './demos/02-demo/demo02-module';
 import './demos/03-demo/demo03-module';
 
 
+// Pages
+import './pages/home-component/home-component';
+import './pages/users-component/users-component';
+
 // Components 
 import './app-component';
 import './components/navbar/navbar-component';
