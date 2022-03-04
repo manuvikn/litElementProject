@@ -1,57 +1,41 @@
 const { LitElement, html, css } = require("lit");
+const { PageActiveService } = require("../../services/page-active.service");
 
 class MainComponent extends LitElement {
 
     static get properties() {
         return {
-            active: {type: Boolean}
+            pageActive: {type: String},
+            pageActiveService: {type: PageActiveService}
         }
     }
 
     constructor() {
         super();
-
-        this.active = false;
+        this.pageActive = 'home';
+        this.pageActiveService = PageActiveService.instance;
     }
 
     static get styles() {
         return css`.container{ margin: 2em 3em }`;
     }
 
+    connectedCallback() {
+
+        super.connectedCallback();
+        // this.pageActiveService
+
+    }
+
     render() {
 
-        return html`<div class="container">
-        <collapse-component>
-                <p>El componente está ${ this.active ? 'activo' : 'desactivado' }!</p>
-                        <input @change=${ this.changeState } type="checkbox" ?checked=${this.active} />
-                        <button @click=${ this.changeState }>${ this.active ? 'Desactivar' : 'Activar' }</button>
-        </collapse-component>
+        return html`
+            <div class="container">
 
-        <br><br>
-        <button @click=${this.toggle}>toggle</button>
-
-        <br/><br/>
-
-        <until-directive></until-directive>
-
-        <brewery-app></brewery-app>
-
-
-        </div>`;
-
-    }
-
-    changeState() {
-
-        this.active = !this.active;
-
-    }
-
-    toggle() {
-
-        const collapse = this.shadowRoot.querySelector('collapse-component');
-
-        collapse.toggle();
+                <cards-component></cards-component>
+            
+            </div>
+        `;
 
     }
 
