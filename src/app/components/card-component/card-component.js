@@ -22,6 +22,10 @@ class CardComponent extends LitElement {
 
             }
 
+            .card:hover {
+                background-color: rgb(47, 124, 187);
+            }
+
             .cardBody {
                 
                 display: flex;
@@ -35,6 +39,7 @@ class CardComponent extends LitElement {
 
                 text-align: center;
                 width: 80%;
+                padding: 0 1em;
                 border-bottom: 2px solid rgba(146, 146, 146, 0.616);
                 margin-bottom: 0;
                 padding-bottom: 1em;

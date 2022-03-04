@@ -1,9 +1,11 @@
+import { Subject } from 'rxjs';
+
 export class PageActiveService {
 
     static _instance = null;
     static _error = true;
 
-    pageActive;
+    _pageActive = null;
 
     constructor() {
 
@@ -12,7 +14,7 @@ export class PageActiveService {
 
         PageActiveService._error = true;
 
-        
+        this._pageActive = new Subject();
 
     }
 
@@ -25,6 +27,10 @@ export class PageActiveService {
             return PageActiveService._instance;
         }
 
+    }
+
+    get pageActive() {
+        return this._pageActive;
     }
 
 }
