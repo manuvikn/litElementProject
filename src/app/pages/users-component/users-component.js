@@ -1,6 +1,23 @@
 import { html, LitElement } from "lit";
+import { PageActiveService } from "../../services/page-active.service";
 
 class UsersComponent extends LitElement {
+
+    static get properties() {
+
+        return {
+            pageActiveService: {type: PageActiveService}
+        };
+
+    }
+
+    constructor() {
+
+        super();
+        this.pageActiveService = PageActiveService.instance;
+
+    }
+
 
     render() {
 
