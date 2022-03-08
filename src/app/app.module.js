@@ -16,3 +16,7 @@ import './components/collapse/collapse-component';
 import './components/collapse-nav/collapse.nav-component';
 import './components/cards-component/cards-component';
 import './components/card-component/card-component';
+
+
+// Utils
+import './utils/paginator/paginator-component';
